@@ -1,5 +1,5 @@
 <?php
-set_time_limit(360);
+set_time_limit(1000);
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 include("../config.php");
 

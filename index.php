@@ -77,6 +77,8 @@
     </header> -->
 
 	<?php
+	include("config.php");
+	
 	$page=$_REQUEST['page'];
 	$table=$_REQUEST['table'];
 	

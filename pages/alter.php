@@ -23,9 +23,36 @@ if($table=="fsd_discount"){
 	  ADD `long_description` VARCHAR(255) DEFAULT NULL,
 	  ADD `ch_business_product` VARCHAR(255) DEFAULT NULL,
 	  ADD `ch_offer_priority` INT(3) DEFAULT NULL,
-	  ADD `ch_featured_product` VARCHAR(10) DEFAULT NULL;;";
+	  ADD `ch_featured_product` VARCHAR(10) DEFAULT NULL;";
 	  
 }
+
+if($table=="roaming_product"){
+	
+	$sql="ALTER TABLE $table 
+	  ADD `name` VARCHAR(100) DEFAULT NULL,
+	  ADD `short_description` VARCHAR(100) DEFAULT NULL,
+	  ADD `long_description` VARCHAR(255) DEFAULT NULL,
+	  ADD `ch_business_product` VARCHAR(255) DEFAULT NULL,
+	  ADD `ch_offer_priority` INT(3) DEFAULT NULL,
+	  ADD `ch_featured_product` VARCHAR(10) DEFAULT NULL;";
+	  
+}
+
+
+if($table=="dynda_service_promo_city" || $table=="dynda_service_promo_product"){
+	
+	$sql="ALTER TABLE $table 
+	  ADD `product_id` VARCHAR(100) DEFAULT NULL FIRST,
+	  ADD `name` VARCHAR(100) DEFAULT NULL AFTER `product_id`,
+	  ADD `short_description` VARCHAR(100) DEFAULT NULL,
+	  ADD `long_description` VARCHAR(255) DEFAULT NULL,
+	  ADD `ch_business_product` VARCHAR(255) DEFAULT NULL,
+	  ADD `ch_offer_priority` INT(3) DEFAULT NULL,
+	  ADD `ch_featured_product` VARCHAR(10) DEFAULT NULL;";
+	  //echo $sql;
+}
+
 
 $result = $conn->query($sql);
 if($result){

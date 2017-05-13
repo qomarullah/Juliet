@@ -33,7 +33,7 @@ if ($conn_wl->connect_error) {
 $servername_prem = "localhost";
 $username_prem = "root";
 $password_prem = "";
-$dbname_prem = "reflex_premium_whitelist";
+$dbname_prem = "reflex_premium";
 
 // Create connection
 $conn_prem = new mysqli($servername_prem, $username_prem, $password_prem, $dbname_prem);
@@ -46,8 +46,7 @@ if ($conn_prem->connect_error) {
 $servername_mass = "localhost";
 $username_mass = "root";
 $password_mass = "";
-$dbname_mass = "reflex";
-
+$dbname_mass = "reflex_massive";
 
 // Create connection
 $conn_mass = new mysqli($servername_mass, $username_mass, $password_mass, $dbname_mass);

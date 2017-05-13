@@ -28,22 +28,19 @@ echo "
 $tx = date("Ymd_His");
 $table_tx=$table."_".$tx;
 $filename="temp/".$table_tx.".sql";
-$content="";	
 
 if($table=="fsd_product" || $table=="fsd_discount"){
 	
 	$sql="select * from $table";
 	$result = $conn_wl->query($sql);
 	$total = $result->num_rows;
-	$content.= "total row table ...".$total;
-	$content.="<br>";
-	
+	echo "total row table ...".$total;
+	echo "<br>";
 
-	
 	$sql_truncate="drop table if exists $table";
 	$result_truncate = $conn->query($sql_truncate);
-	$content.= "drop table temp...";
-	$content.="<br>";
+	echo "drop table temp...";
+	echo "<br>";
 	
 	$world_dumper = Shuttle_Dumper::create(array(
 		'host' => $servername_wl,
@@ -53,10 +50,54 @@ if($table=="fsd_product" || $table=="fsd_discount"){
 		'include_tables' => array($table),
 	));
 	$world_dumper->dump($filename);
+	execute_sql($conn, $table, $filename);
+}
+
+if($table=="roaming_product"){
 	
-	execute_sql($conn,$filename);
+	$sql="select * from $table";
+	$result = $conn_prem->query($sql);
+	$total = $result->num_rows;
+	echo "total row table ...".$total;
+	echo "<br>";
+
+	$sql_truncate="drop table if exists $table";
+	$result_truncate = $conn->query($sql_truncate);
+	echo "drop table temp...";
+	echo "<br>";
 	
+	$world_dumper = Shuttle_Dumper::create(array(
+		'host' => $servername_prem,
+		'username' => $username_prem,
+		'password' => $password_prem,
+		'db_name' => $dbname_prem,
+		'include_tables' => array($table),
+	));
+	$world_dumper->dump($filename);
+	execute_sql($conn, $table, $filename);
+}
+if(startsWith($table, 'dynda_')){
 	
+	$sql="select * from $table";
+	$result = $conn_mass->query($sql);
+	$total = $result->num_rows;
+	echo "total row table ...".$total;
+	echo "<br>";
+
+	$sql_truncate="drop table if exists $table";
+	$result_truncate = $conn->query($sql_truncate);
+	echo "drop table temp...";
+	echo "<br>";
+	
+	$world_dumper = Shuttle_Dumper::create(array(
+		'host' => $servername_mass,
+		'username' => $username_mass,
+		'password' => $password_mass,
+		'db_name' => $dbname_mass,
+		'include_tables' => array($table),
+	));
+	$world_dumper->dump($filename);
+	execute_sql($conn, $table, $filename);
 }
 
 if(startsWith($table, 'services_') || $table=='bonuses' || $table=='price'){
@@ -74,6 +115,14 @@ if(startsWith($table, 'services_') || $table=='bonuses' || $table=='price'){
 	echo "<br>";
 	exec("java -jar lib/ApiOracleDb.jar ".$param." 2>&1", $output);
 	print_r($output);
+	
+	
+	//alter add index
+	echo "add indexing..";
+	echo "<br>";
+	$sql_index="CREATE INDEX idx)id ON ".$table." (ID)";
+	$result_index = $conn->query($sql_index);
+	
 	execute_sql($conn, $table, $filename);
 	
 }
@@ -91,14 +140,14 @@ if(startsWith($table, 'services_') || $table=='bonuses' || $table=='price'){
 		
 function execute_sql($conn, $table, $filename){
 	
-	$sql="select * from $table";
-	$result = $conn->query($sql);
+	/* $sql="select * from $table";
+	$result = $conn->query($sql); */
 		
-	$content.= "dump production table ...";
-	$content.="<br>";
+	echo "dump production table ...";
+	echo "<br>";
 		
-	$content.= "execute to temporary table ...";
-	$content.="<br>";
+	echo "execute to temporary table ...";
+	echo "<br>";
 			
 		//execute
 		$lines = file($filename);
@@ -120,9 +169,9 @@ function execute_sql($conn, $table, $filename){
 		$result = $conn->query($sql);
 		$total = $result->num_rows;
 
-		$content.= "finish  total ".$table." ...".$total;
-		$content.="<br>";
-		echo $content;
+		echo "finish  total ".$table." ...".$total;
+		echo "<br>";
+		
 
 }
 
