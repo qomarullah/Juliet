@@ -100,7 +100,7 @@ if(startsWith($table, 'dynda_')){
 	execute_sql($conn, $table, $filename);
 }
 
-if(startsWith($table, 'services_') || $table=='bonuses' || $table=='price'){
+if(startsWith($table, 'services_') || $table=='bonuses' || $table=='price' || $table=='context'){
 	
 	$table=strtoupper($table);
 	
@@ -120,7 +120,7 @@ if(startsWith($table, 'services_') || $table=='bonuses' || $table=='price'){
 	//alter add index
 	echo "add indexing..";
 	echo "<br>";
-	$sql_index="CREATE INDEX idx)id ON ".$table." (ID)";
+	$sql_index="ALTER TABLE ".$table." ADD FULLTEXT INDEX idx (ID)";
 	$result_index = $conn->query($sql_index);
 	
 	execute_sql($conn, $table, $filename);

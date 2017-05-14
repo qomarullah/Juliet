@@ -61,6 +61,10 @@ echo "<div class=\"container\">
                         <a href=\"pages/show_price.php\">Show price</a>
                     </li>
 					
+					<li class=\"page-scroll\">
+                        <a href=\"pages/show_context.php\">Show context</a>
+                    </li>
+					
 					
 				</div>
 		    </div>

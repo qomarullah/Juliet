@@ -29,6 +29,8 @@ echo "<div class=\"container\">
                         <a href=\"index.php?page=export&table=dynda_service_promo_product\">Export Latest dynda_service_promo_product</a>
                     </li>
 					
+					
+					
 				</div>
 		    </div>
 			<!-------------->
@@ -81,8 +83,12 @@ echo "<div class=\"container\">
                         <a href=\"index.php?page=export&table=bonuses\">Export Latest bonuses</a>
                     </li>
 					
-						<li class=\"page-scroll\">
+					<li class=\"page-scroll\">
                         <a href=\"index.php?page=export&table=price\">Export Latest price</a>
+                    </li>
+					
+					<li class=\"page-scroll\">
+                        <a href=\"index.php?page=export&table=context\">Export Latest context</a>
                     </li>
 					
 				</div>

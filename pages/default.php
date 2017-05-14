@@ -6,7 +6,7 @@
 			   <div class="intro-text">
                         <h3 class="name">Bapaknya Juliet</h3>
                         <hr class="star-light">
-                        <span class="skills">No More Romeo</span>
+                        <span class="skills">Hello Romeo</span>
                     </div>
 			</div>
 		</div>
